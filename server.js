@@ -4,7 +4,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 const http = require('http').Server(app);
 
-
 //Habilitar o cors
 app.use(cors());
 //permitir que a origem do evento venha de qualquer lugar *
@@ -16,6 +15,11 @@ io.on('connection', (socket) =>{
 
         io.emit('message', msg);
     })
+
+    socket.on('disconnect', () =>{
+        console.log("Usuário desconectado!")
+    })
+
 })
 
 
