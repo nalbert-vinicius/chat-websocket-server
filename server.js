@@ -10,6 +10,11 @@ app.use(cors());
 const io = require('socket.io')(http, {cors: {origin: '*'}});
 
 io.on('connection', (socket) =>{
+
+    socket.on('room', (data) =>{
+        console.log(data)
+    })
+
     socket.on('message', (msg) =>{
         console.log(msg);
 
