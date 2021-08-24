@@ -11,14 +11,22 @@ const io = require('socket.io')(http, {cors: {origin: '*'}});
 
 io.on('connection', (socket) =>{
 
-    socket.on('room', (data) =>{
-        console.log(data)
+    socket.on('criarSala', (data) =>{
+        socket.join(data.nomeSala)
+        console.log(data);
+    })
+
+    socket.on('entrarSala', (data) =>{
+        socket.join(data.nomeSala);
     })
 
     socket.on('message', (msg) =>{
         console.log(msg);
+        //emite de forma global - broadcast
+        //io.emit('message', msg);
 
-        io.emit('message', msg);
+        //emite apenas para o socket atual
+        socket.emit('message', msg);
     })
 
     socket.on('disconnect', () =>{
