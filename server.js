@@ -21,8 +21,7 @@ io.on('connection', (socket) =>{
 
     socket.on('message', (nomeSala, msg) =>{
         console.log(msg);
-        //emite de forma global - broadcast
-        //io.emit('message', msg);
+        
 
         //emite apenas para a sala recebida por parametro
         socket.in(nomeSala.id).emit('message', msg)
